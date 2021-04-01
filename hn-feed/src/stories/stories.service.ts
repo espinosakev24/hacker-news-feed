@@ -14,7 +14,9 @@ export class StoriesService {
   ) {}
 
   async getStories(): Promise<IStory[]> {
-    return await this.storyModel.find({ ignore: false });
+    return await this.storyModel
+      .find({ ignore: false })
+      .sort({ createdDate: -1 });
   }
   async getStoryByStoryId(id: string): Promise<IStory> {
     return await this.storyModel.findOne({ storyId: id });
