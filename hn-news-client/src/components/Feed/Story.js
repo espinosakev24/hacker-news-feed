@@ -22,7 +22,7 @@ export function Story({ story, deleteStory, ...props }) {
   return (
     <a href={story.storyUrl} target="_blank" rel="noreferrer" key={story.key}>
       <li id={story.storyId}>
-        <p>
+        <p className="hn-title-text">
           {story.title} <span className="hn-author"> - {story.author} -</span>
         </p>
         <div className="hn-time-and-trash">

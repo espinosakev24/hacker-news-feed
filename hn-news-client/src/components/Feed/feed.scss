@@ -16,6 +16,30 @@
     font-family: 'Quicksand', sans-serif;
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 600px) {
+        display: block;
+        .hn-time-and-trash {
+            display: flex;
+            justify-content: space-between;
+            height: 30px;
+            margin-top: 20px;
+        }
+    }
+
+    .hn-title-text {
+        max-width: 800px;
+        @media (max-width: 1000px) {
+            max-width: 400px;
+        }
+        @media (max-width: 750px) {
+            max-width: 330px;
+        }
+        @media (max-width: 600px) {
+            max-width: 100%;
+        }
+    }
+
     &::after {
         position: absolute;
         content: '';
@@ -32,9 +56,15 @@
     }
     .hn-time-and-trash {
         display: flex;
+        align-items: center;
         width: 200px;
         position: relative;
-
+        @media (max-width: 750px) {
+            width: 150px;
+        }
+        @media (max-width: 600px) {
+            width: 100%;
+        }
         .hn-time-text {
             position: absolute;
             left: 0;

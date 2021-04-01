@@ -24,7 +24,7 @@ export function Feed() {
     <section className="hn-feed-wrapper">
       <ul className="hn-stories-container">
         {stories.map((story, key) => (
-          <Story story={story} deleteStory={deleteStory} />
+          <Story story={story} deleteStory={deleteStory} key={key} />
         ))}
       </ul>
     </section>
