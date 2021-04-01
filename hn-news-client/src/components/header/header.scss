@@ -1,2 +1,13 @@
+@import './../../scss/variables.scss';
 
-
+.hn-header {
+    background-color: $title-color;
+    color: $white;
+    padding: 50px 58px;
+    font-size: $title-font-size;
+    .hn-subtitle {
+        font-size: $font-size;
+        word-spacing: 3px;
+    }
+    margin-bottom: 1rem;
+}

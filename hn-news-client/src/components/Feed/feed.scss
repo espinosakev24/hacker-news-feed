@@ -1,0 +1,57 @@
+@import './../../scss/variables.scss';
+
+.hn-feed-wrapper {
+    a {
+        text-decoration: none;
+        cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABL0lEQVRIS+2UwVECQRBFHxFoBmoEagRKBEokaARKBGokYARqBEoEaAaagfWsnq0FZneGKigP2pc9zEz//q+7d8COY7Dj/PwtgX3gKZAOgc8avJsgugfGkfQBuNqmwHmr+pRXF88lkRoHonkFDoFJJLwB3oHTEqoagRlwAcyBkxB4A44Bz0Z9LkoCl8AU+IrkVm3oRpG9EFAoG30ColkAfq8Bm9wOm3wXiI66UPUJ2MAz4AWwyblId/za9LXoEkjViUYcXTOvO7GJKucy+6swoVPjYxvYyTfKTX2yCKcq9ennOOcgTcgj4OOaSJPmW0WaWBW4BZzxj5iaqt9BuDX5QeyKedYcOOOiMaq2dMVae9t1oeASooSmBknpToOqjWibAs3Wlza5VGnx/F/g9xF9A+92NxlgqPjTAAAAAElFTkSuQmCC"), auto;
+    }
+}
+
+.hn-stories-container li {
+    background-color: $row-bg-color;
+    position: relative;
+    padding: 20px 60px;
+    color: $title-color;
+    font-weight: 600;
+    font-size: $font-size;
+    font-family: 'Quicksand', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    &::after {
+        position: absolute;
+        content: '';
+        border-bottom: $border-props;
+        width: 95%;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: center;
+    }
+    .hn-author {
+        color: $author-color;
+    }
+    .hn-time-and-trash {
+        display: flex;
+        width: 200px;
+        position: relative;
+        // justify-content: space-between;
+
+        .hn-time-text {
+            position: absolute;
+            left: 0;
+        }
+        .hn-trash-icon {
+            position: absolute;
+            right: 0;
+            display: none;
+            cursor: pointer;
+        }
+    }
+    &:hover {
+        background-color: $row-hover-color;
+    }
+    &:hover .hn-trash-icon {
+        display: block;
+    }
+}

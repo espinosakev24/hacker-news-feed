@@ -1,7 +1,14 @@
 import "./App.scss";
+import { Header } from "./components/header/Header";
+import { Feed } from "./components/Feed/Feed";
 
 function App() {
-  return <div className="App">Hola</div>;
+  return (
+    <>
+      <Header />
+      <Feed />
+    </>
+  );
 }
 
 export default App;
