@@ -61,7 +61,7 @@ describe('StoriesController', () => {
     expect(controller).toBeDefined();
   });
 
-  describe('getStories', () => {
+  describe('storiesController.getStories', () => {
     it('should get an object containing array of stories', () => {
       expect(controller.getStories()).resolves.toEqual([
         {
@@ -91,7 +91,7 @@ describe('StoriesController', () => {
     });
   });
 
-  describe('ignoreStory', () => {
+  describe('storiesController.ignoreStory', () => {
     it('should call service.ignoreStory', () => {
       controller.ignoreStory('uuid');
       expect(service.ignoreStory).toBeCalled();

@@ -2,20 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { StoriesService } from './stories.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { IStory } from './interfaces/story.interface';
-import { Model } from 'mongoose';
+import { Model, Query } from 'mongoose';
 import { HttpModule } from '@nestjs/common';
-
-const mockStory = (
-  storyId: string,
-  title: string,
-  comment: string,
-  author: string,
-  ignore: boolean,
-  storyUrl: string,
-  createdDate: string,
-) => {
-  return { storyId, title, comment, author, ignore, storyUrl, createdDate };
-};
+import { createMock } from '@golevelup/nestjs-testing';
+import { Observable } from 'rxjs';
 
 describe('StoriesService', () => {
   let service: StoriesService;
@@ -28,7 +18,9 @@ describe('StoriesService', () => {
         {
           provide: getModelToken('Story'),
           useValue: {
-            // constructor: jest.fn().mockResolvedValue()
+            find: jest.fn(),
+            insertMany: jest.fn(),
+            updateOne: jest.fn(),
           },
         },
       ],
@@ -37,9 +29,59 @@ describe('StoriesService', () => {
 
     service = module.get<StoriesService>(StoriesService);
     model = module.get<Model<IStory>>(getModelToken('Story'));
+
+    jest.spyOn(model, 'find').mockReturnValueOnce(
+      createMock<Query<IStory[], IStory>>({
+        sort: jest.fn().mockResolvedValueOnce([
+          {
+            storyId: 'uuid id',
+            title: 'Node news',
+            comment: 'node is fun',
+            author: 'anonym',
+            ignore: false,
+            storyUrl: 'https://url.com',
+            createdDate: '1/4/2021',
+          },
+        ]),
+      }),
+    );
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  describe('storiesService.getStories', () => {
+    it('should call StoryModel.find', async () => {
+      await service.getStories();
+      expect(model.find).toBeCalled();
+    });
+
+    it('should return obj of type array', async () => {
+      const stories = await service.getStories();
+      expect(Array.isArray(stories)).toBe(true);
+    });
+
+    it('should return array of stories', async () => {
+      const stories = await service.getStories();
+      expect(stories).toEqual([
+        {
+          storyId: 'uuid id',
+          title: 'Node news',
+          comment: 'node is fun',
+          author: 'anonym',
+          ignore: false,
+          storyUrl: 'https://url.com',
+          createdDate: '1/4/2021',
+        },
+      ]);
+    });
+  });
+
+  describe('storiesService.ignoreStory', () => {
+    it('should call model.updateOne', async () => {
+      await service.ignoreStory('uuid id');
+      expect(model.updateOne).toBeCalled();
+    });
   });
 });

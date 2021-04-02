@@ -19,13 +19,15 @@ export class StoriesService {
    * @returns {Promise<IStory[]>} promise that resolves with array of stories
    */
   async getStories(): Promise<IStory[]> {
-    return await this.storyModel
+    const stories = await this.storyModel
       .find({ ignore: false })
       .sort({ createdDate: -1 });
+    return stories;
   }
 
   async getStoryByStoryId(id: string): Promise<IStory> {
-    return await this.storyModel.findOne({ storyId: id });
+    const story = await this.storyModel.findOne({ storyId: id });
+    return story;
   }
 
   /**
