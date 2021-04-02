@@ -1,5 +1,8 @@
 import "./header.scss";
 
+/**
+ * Header component that holds the main title of the app.
+ */
 export function Header() {
   return (
     <header className="hn-header">

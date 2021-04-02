@@ -4,15 +4,20 @@ import { Story } from "./Story";
 import axios from "axios";
 
 const APIEndPoint = "http://localhost:4000/stories";
+
+/**
+ * Component that wraps the list of stories and handles main app state.
+ */
 export function Feed() {
   const [stories, setStories] = useState([]);
 
   const getStories = async () => {
     const response = await axios.get(APIEndPoint);
-    setStories(response.data.stories);
+    setStories(response.data);
   };
+
   const deleteStory = async (storyId) => {
-    await axios.delete(`${APIEndPoint}/${storyId}`);
+    await axios.put(`${APIEndPoint}/${storyId}`);
     getStories();
   };
 

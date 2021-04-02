@@ -5,6 +5,16 @@ import { Interval, ScheduleModule } from '@nestjs/schedule';
 import { StoriesController } from './stories.controller';
 import { StoriesService } from './stories.service';
 
+/**
+ * @module StoriesModule creates db connection and starts cronjob
+ *
+ * @borrows storiesService.updateStories in order to update database
+ * each hour with the stories/feed that comes from the algolia's api
+ * {@link https://hn.algolia.com/api/v1/search_by_date?query=nodejs}
+ *
+ * @class
+ * @classdesc Stories Module
+ */
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Story', schema: StorySchema }]),

@@ -1,12 +1,24 @@
 import iconTrash from "./iconTrash.svg";
 import moment from "moment";
 
-export function Story({ story, deleteStory, ...props }) {
+/**
+ * Story item component
+ * @param {object} props Component props
+ * @param {function} props.deleteStory function that calls parent method to remove story
+ * @param {function} props.story Object containing story information
+ */
+export function Story({ deleteStory, story, ...props }) {
   const handleDeleteStory = (event, storyId) => {
     event.preventDefault();
     deleteStory(storyId);
   };
 
+  /**
+   * Formats date string to the required format.
+   *
+   * @param {string} dateString Date string to convert
+   * @returns {string}
+   */
   const formatDate = (dateString) => {
     const [day, , hours, meridiem] = moment(dateString).calendar().split(" ");
     const [fDay, fMonth] = moment(dateString).format("ll").split(" ");
